@@ -1,12 +1,12 @@
 <script setup>
 import AppNavigation from '@/components/AppNavigation.vue'
 import AppButton from '@/components/ui/AppButton.vue'
-import AppHeader from '@/components/AppHeader.vue'
+import PageHeading from '@/components/PageHeading.vue'
 </script>
 
 <template>
     <div class="flex flex-col items-center">
-        <AppHeader class="mb-3">Навигация</AppHeader>
+        <PageHeading class="mb-3">Навигация</PageHeading>
         <AppNavigation class="w-1/6">
             <li>
                 <AppButton

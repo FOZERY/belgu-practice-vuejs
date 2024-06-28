@@ -1,6 +1,6 @@
 <script setup>
 import MainLayout from '@/layouts/MainLayout.vue'
-import AppHeader from '@/components/AppHeader.vue'
+import PageHeading from '@/components/PageHeading.vue'
 import AppNavigation from '@/components/AppNavigation.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import { onMounted } from 'vue'
@@ -18,11 +18,12 @@ onMounted(async () => {
 <template>
     <MainLayout>
         <div class="flex flex-col items-center">
-            <AppHeader class="mb-3">Курсы</AppHeader>
+            <PageHeading class="mb-3">Курсы</PageHeading>
             <div class="w-full px-5">
                 <ul class="flex flex-col gap-3">
                     <li v-for="course in coursesStore.courses" :key="course.id">
                         <router-link
+                            :to="{ name: 'main' }"
                             href="#"
                             class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
                         >

@@ -1,12 +1,12 @@
 <script setup>
 import AppButton from '@/components/ui/AppButton.vue'
-import AppHeader from '@/components/AppHeader.vue'
+import PageHeading from '@/components/PageHeading.vue'
 </script>
 
 <template>
     <div class="">
         <div class="flex flex-col items-center">
-            <AppHeader>Навигация</AppHeader>
+            <PageHeading>Навигация</PageHeading>
             <div class="flex flex-col mt-3">
                 <nav>
                     <ul class="flex flex-col items-center gap-3">
