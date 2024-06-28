@@ -21,6 +21,12 @@ const routes = [
         meta: { auth: true },
     },
     {
+        path: '/courses/:id',
+        component: () => import('@/pages/OneCoursePage.vue'),
+        name: 'oneCourse',
+        meta: { auth: true },
+    },
+    {
         path: '/:pathName(.*)',
         redirect: '/',
     },

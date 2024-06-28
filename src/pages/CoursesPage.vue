@@ -3,15 +3,26 @@ import MainLayout from '@/layouts/MainLayout.vue'
 import PageHeading from '@/components/PageHeading.vue'
 import AppNavigation from '@/components/AppNavigation.vue'
 import AppButton from '@/components/ui/AppButton.vue'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useCoursesStore } from '@/stores/coursesStore.js'
+import AppLoader from '@/components/ui/AppLoader.vue'
 
 const userStore = useUserStore()
 const coursesStore = useCoursesStore()
 
+const isLoading = ref(true)
 onMounted(async () => {
-    await coursesStore.getCoursesByStudentId(userStore.user.student_id)
+    try {
+        if (userStore.user.user_role_id === 2) {
+            await coursesStore.getCoursesByTeacherId(userStore.user.teacher_id)
+        } else if (userStore.user.user_role_id === 3) {
+            await coursesStore.getCoursesByStudentId(userStore.user.student_id)
+        }
+    } catch (e) {
+    } finally {
+        isLoading.value = false
+    }
 })
 </script>
 
@@ -20,10 +31,14 @@ onMounted(async () => {
         <div class="flex flex-col items-center">
             <PageHeading class="mb-3">Курсы</PageHeading>
             <div class="w-full px-5">
-                <ul class="flex flex-col gap-3">
+                <AppLoader class="mx-auto" v-if="isLoading" />
+                <ul v-else class="flex flex-col gap-3">
                     <li v-for="course in coursesStore.courses" :key="course.id">
                         <router-link
-                            :to="{ name: 'main' }"
+                            :to="{
+                                name: 'oneCourse',
+                                params: { id: course.id },
+                            }"
                             href="#"
                             class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
                         >
