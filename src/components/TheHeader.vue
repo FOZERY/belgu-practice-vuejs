@@ -10,7 +10,7 @@ const logout = () => {
     userStore.user = {}
     userStore.isAuth = false
     localStorage.removeItem('token')
-    router.push({ name: 'login' })
+    window.location.reload()
 }
 </script>
 
@@ -21,7 +21,7 @@ const logout = () => {
                 <div class="flex flex-col">
                     <div
                         class="flex gap-x-1 leading-5 flex-wrap text-sm sm:text-base"
-                        v-if="userStore.user.role_id !== 1"
+                        v-if="userStore.user.user_role_id !== 1"
                     >
                         <span>{{ userStore.user.second_name }}</span>
                         <span>{{ userStore.user.first_name }}</span>
