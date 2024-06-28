@@ -5,6 +5,9 @@ export default {
     theme: {
         extend: {},
     },
+    future: {
+        hoverOnlyWhenSupported: true,
+    },
     plugins: [
         // ...
         require('@tailwindcss/forms'),
