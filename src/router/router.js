@@ -20,6 +20,10 @@ const routes = [
         name: 'courses',
         meta: { auth: true },
     },
+    {
+        path: '/:pathName(.*)',
+        redirect: '/',
+    },
 ]
 
 const router = createRouter({
