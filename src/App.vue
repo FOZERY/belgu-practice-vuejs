@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore.js'
 import router from '@/router/router.js'
 import { onBeforeRouteUpdate } from 'vue-router'
+import AppLoader from '@/components/ui/AppLoader.vue'
 
 const userStore = useUserStore()
 
@@ -22,7 +23,13 @@ onMounted(() => {
 </script>
 
 <template>
-    <router-view v-if="!isLoading"></router-view>
+    <div
+        v-if="isLoading"
+        class="w-full h-full flex justify-center items-center pb-32"
+    >
+        <AppLoader v-if="!isLoading" />
+    </div>
+    <router-view v-else></router-view>
 </template>
 
 <style scoped></style>
