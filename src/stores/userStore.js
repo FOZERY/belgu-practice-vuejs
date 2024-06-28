@@ -10,7 +10,7 @@ export const useUserStore = defineStore('userStore', {
 
     getters: {
         getUserRole() {
-            const role_id = this.user.role_id
+            const role_id = this.user.user_role_id
             if (role_id === 3) {
                 return 'Студент'
             } else if (role_id === 2) {
