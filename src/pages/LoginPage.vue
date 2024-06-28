@@ -2,7 +2,21 @@
 import LoginLayout from '@/layouts/LoginLayout.vue'
 import AppButton from '@/components/ui/AppButton.vue'
 import AppInput from '@/components/ui/AppInput.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useUserStore } from '@/stores/userStore.js'
+import router from '@/router/router.js'
+
+const userStore = useUserStore()
+
+const signIn = async () => {
+    try {
+        userStore.user = await userStore.login(email.value, password.value)
+        userStore.isAuth = true
+        await router.push({ name: 'main' })
+    } catch (e) {
+        alert(e.response.data.message || e.message)
+    }
+}
 
 const password = ref('')
 const email = ref('')
@@ -19,7 +33,7 @@ const email = ref('')
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" @submit.prevent>
+            <form class="space-y-6" @submit.prevent="signIn()">
                 <div>
                     <label
                         for="email"
@@ -56,8 +70,9 @@ const email = ref('')
 
                 <div>
                     <AppButton
-                        class="w-full bg-blue-700 text-white font-medium py-1.5 hover:bg-blue-600"
-                        @click.prevent=""
+                        :disabled="!password || !email"
+                        :type="'submit'"
+                        class="w-full bg-blue-700 text-white font-medium py-1.5 hover:bg-blue-600 disabled:bg-blue-300"
                         >Войти</AppButton
                     >
                 </div>
