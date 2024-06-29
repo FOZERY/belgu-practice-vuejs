@@ -2,12 +2,6 @@
 import AppButton from '@/components/ui/AppButton.vue'
 </script>
 
-<template>
-    <nav>
-        <ul class="">
-            <slot></slot>
-        </ul>
-    </nav>
-</template>
+<template></template>
 
 <style scoped></style>

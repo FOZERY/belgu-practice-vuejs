@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { $host, $authhost } from '@/http/index.js'
 import { jwtDecode } from 'jwt-decode'
+import AccessError from '@/router/errors/AccessError.js'
 
 export const useUserStore = defineStore('userStore', {
     state: () => ({
@@ -28,13 +29,22 @@ export const useUserStore = defineStore('userStore', {
                 password,
             })
             localStorage.setItem('token', data.token)
-            return jwtDecode(data.token)
+            const decodedData = jwtDecode(data.token)
+            this.user = decodedData
+            this.isAuth = true
+            return decodedData
         },
 
         async check() {
+            if (this.user.user_role_id) return
+
             const { data } = await $authhost.get('api/user/auth')
             localStorage.setItem('token', data.token)
-            return jwtDecode(data.token)
+
+            const decodedData = jwtDecode(data.token)
+            this.user = decodedData
+            this.isAuth = true
+            return decodedData
         },
 
         async getUserInfo() {

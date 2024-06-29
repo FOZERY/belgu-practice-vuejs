@@ -1,16 +1,16 @@
 <script setup>
-import AppButton from '@/components/ui/AppButton.vue'
 import AppWrapper from '@/components/utils/AppWrapper.vue'
 import { useUserStore } from '@/stores/userStore.js'
 import router from '@/router/router.js'
+import checkHasRole from '@/helpers/checkHasRole.js'
 
 const userStore = useUserStore()
 
 const logout = () => {
+    localStorage.removeItem('token')
     userStore.user = {}
     userStore.isAuth = false
-    localStorage.removeItem('token')
-    window.location.reload()
+    router.push({ name: 'login' })
 }
 </script>
 
@@ -21,7 +21,7 @@ const logout = () => {
                 <div class="flex flex-col">
                     <div
                         class="flex gap-x-1 leading-5 flex-wrap text-sm sm:text-base"
-                        v-if="userStore.user.user_role_id !== 1"
+                        v-if="checkHasRole(['TEACHER', 'STUDENT'])"
                     >
                         <span>{{ userStore.user.second_name }}</span>
                         <span>{{ userStore.user.first_name }}</span>
