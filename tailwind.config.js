@@ -14,7 +14,9 @@ export default {
     plugins: [
         plugin(({ addBase, theme }) => {
             addBase({
-                a: { color: theme('colors.sky.600') },
+                a: {
+                    color: theme('colors.sky.600'),
+                },
             })
         }),
         // eslint-disable-next-line no-undef

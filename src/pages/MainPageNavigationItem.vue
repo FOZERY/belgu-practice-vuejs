@@ -10,7 +10,7 @@ defineProps({
     <li>
         <router-link :to="to">
             <AppButton
-                class="bg-white border text-black text-xl rounded-2xl hover:scale-105 w-full"
+                class="bg-white border text-black text-lg rounded-2xl hover:scale-105 text-center w-full"
                 ><slot></slot></AppButton
         ></router-link>
     </li>

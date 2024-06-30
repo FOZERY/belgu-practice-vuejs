@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/userStore.js'
 import fetchAuthDataMiddleware from '@/router/middlewares/fetchAuthDataMiddleware.js'
 
 import routeGuardMiddleware from '@/router/middlewares/routeGuardMiddleware.js'
@@ -30,6 +29,12 @@ const routes = [
         path: '/courses/:id',
         component: () => import('@/pages/OneCoursePage.vue'),
         name: 'oneCourse',
+        meta: { auth: true, roles: ['ADMIN', 'TEACHER', 'STUDENT'] },
+    },
+    {
+        path: '/courses/:id/group/:groupId/grades',
+        component: () => import('@/pages/CourseGroupGradesPage.vue'),
+        name: 'courseGroupAttendance',
         meta: { auth: true, roles: ['ADMIN', 'TEACHER', 'STUDENT'] },
     },
     {

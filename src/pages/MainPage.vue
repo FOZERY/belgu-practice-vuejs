@@ -1,9 +1,5 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore.js'
-import router from '@/router/router.js'
-import MainLayout from '@/layouts/AppLayoutDefault.vue'
-
-import { computed, defineAsyncComponent, onMounted } from 'vue'
 import PageHeading from '@/components/PageHeading.vue'
 import MainPageNavigation from '@/pages/MainPageNavigation.vue'
 import MainPageNavigationItem from '@/pages/MainPageNavigationItem.vue'
@@ -28,7 +24,7 @@ const componentToRender = computed(() => {
     <div class="flex flex-col items-center">
         <PageHeading class="mb-3">Навигация</PageHeading>
         <MainPageNavigation>
-            <MainPageNavigationItem>Расписание</MainPageNavigationItem>
+            <MainPageNavigationItem>Расписание </MainPageNavigationItem>
             <MainPageNavigationItem :to="{ name: 'courses' }"
                 >Курсы</MainPageNavigationItem
             >

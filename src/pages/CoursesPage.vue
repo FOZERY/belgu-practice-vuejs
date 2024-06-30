@@ -1,8 +1,5 @@
 <script setup>
-import MainLayout from '@/layouts/AppLayoutDefault.vue'
 import PageHeading from '@/components/PageHeading.vue'
-import AppNavigation from '@/components/AppNavigation.vue'
-import AppButton from '@/components/ui/AppButton.vue'
 import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore.js'
 import { useCoursesStore } from '@/stores/coursesStore.js'
@@ -12,12 +9,18 @@ const userStore = useUserStore()
 const coursesStore = useCoursesStore()
 
 const isLoading = ref(true)
+const courses = ref([])
+
 onMounted(async () => {
     try {
         if (userStore.user.user_role_id === 2) {
-            await coursesStore.getCoursesByTeacherId(userStore.user.teacher_id)
+            courses.value = await coursesStore.getCoursesByTeacherId(
+                userStore.user.teacher_id
+            )
         } else if (userStore.user.user_role_id === 3) {
-            await coursesStore.getCoursesByStudentId(userStore.user.student_id)
+            courses.value = await coursesStore.getCoursesByStudentId(
+                userStore.user.student_id
+            )
         }
     } catch (e) {
     } finally {
@@ -32,14 +35,14 @@ onMounted(async () => {
         <div class="w-full px-5">
             <AppLoader class="mx-auto" v-if="isLoading" />
             <ul v-else class="flex flex-col gap-3">
-                <li v-for="course in coursesStore.courses" :key="course.id">
+                <li v-for="course in courses" :key="course.id">
                     <router-link
                         :to="{
                             name: 'oneCourse',
                             params: { id: course.id },
                         }"
                         href="#"
-                        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                        class="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
                     >
                         <div
                             class="flex flex-col justify-between p-4 leading-normal"

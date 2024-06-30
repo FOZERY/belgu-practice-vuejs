@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import { $host, $authhost } from '@/http/index.js'
+import { $authhost, $host } from '@/http/index.js'
 import { jwtDecode } from 'jwt-decode'
-import AccessError from '@/router/errors/AccessError.js'
 
 export const useUserStore = defineStore('userStore', {
     state: () => ({

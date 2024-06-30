@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import { $host, $authhost } from '@/http/index.js'
-import { jwtDecode } from 'jwt-decode'
+import { $authhost } from '@/http/index.js'
 
 export const useCoursesStore = defineStore('coursesStore', {
     state: () => ({
@@ -13,17 +12,16 @@ export const useCoursesStore = defineStore('coursesStore', {
     actions: {
         async getCoursesByStudentId(id) {
             const { data } = await $authhost.get(`/api/student/${id}/courses`)
-            this.courses = data
+            return data
         },
 
         async getCoursesByTeacherId(id) {
             const { data } = await $authhost.get(`/api/teacher/${id}/courses`)
-            this.courses = data
+            return data
         },
 
         async getCourseFullInfo(id) {
             const { data } = await $authhost.get(`/api/course/${id}`)
-            this.course = data
             return data
         },
     },
