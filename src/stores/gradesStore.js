@@ -7,9 +7,9 @@ export const useGradesStore = defineStore('gradesStore', {
     }),
 
     actions: {
-        async getGradesByCourseAndGroup(course_id, group_id, offset) {
+        async getGradesByCourseAndGroup(course_id, group_id, page, limit) {
             const { data } = await $authhost.get(
-                `/api/course/${course_id}/group/${group_id}/grades?offset=${offset}`
+                `/api/course/${course_id}/group/${group_id}/grades?page=${page}&limit=${limit}`
             )
             return data
         },

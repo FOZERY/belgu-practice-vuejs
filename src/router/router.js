@@ -32,8 +32,8 @@ const routes = [
         meta: { auth: true, roles: ['ADMIN', 'TEACHER', 'STUDENT'] },
     },
     {
-        path: '/courses/:id/group/:groupId/grades',
-        component: () => import('@/pages/CourseGroupGradesPage.vue'),
+        path: '/courses/:id/group/:groupId/lessons',
+        component: () => import('@/pages/OneCourseGroupLessonsPage.vue'),
         name: 'courseGroupAttendance',
         meta: { auth: true, roles: ['ADMIN', 'TEACHER', 'STUDENT'] },
     },

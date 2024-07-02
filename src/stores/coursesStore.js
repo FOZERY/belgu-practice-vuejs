@@ -24,5 +24,17 @@ export const useCoursesStore = defineStore('coursesStore', {
             const { data } = await $authhost.get(`/api/course/${id}`)
             return data
         },
+
+        async getCourseGroupLessonsWithGrades(
+            course_id,
+            group_id,
+            page,
+            limit
+        ) {
+            const { data } = await $authhost.get(
+                `/api/course/${course_id}/group/${group_id}/lessons?page=${page}&limit=${limit}`
+            )
+            return data
+        },
     },
 })
