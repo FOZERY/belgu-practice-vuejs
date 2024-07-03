@@ -36,37 +36,29 @@ onMounted(async () => {
         <div class="flex items-center justify-between w-full">
             <div class="flex-grow text-center">
                 <PageHeading>{{ course.course_name }}</PageHeading>
-            </div>
-            <router-link
-                v-if="checkHasRole(['STUDENT'])"
-                :to="{
-                    name: 'courseGroupAttendance',
-                    params: {
-                        id: course.course_id,
-                        groupId: userStore.user.group_id,
-                    },
-                }"
-            >
-                <AppButton class="bg-sky-500 text-white py-1 ml-2"
-                    >В журнал</AppButton
+                <router-link
+                    v-if="checkHasRole(['STUDENT'])"
+                    :to="{
+                        name: 'courseGroupAttendance',
+                        params: {
+                            id: course.course_id,
+                            groupId: userStore.user.group_id,
+                        },
+                    }"
                 >
-            </router-link>
+                    <AppButton class="bg-sky-500 text-white py-1 ml-2"
+                        >В журнал</AppButton
+                    >
+                </router-link>
+            </div>
         </div>
 
         <AppLoader class="mx-auto" v-if="isLoading" />
-        <div v-else class="">
+        <div v-else class="w-full px-12">
             <div class="rounded-2xl border p-5 shadow-md mb-5">
                 <h3 class="text-xl font-medium mb-3">Описание курса</h3>
                 <p>
-                    {{ course.course_description }} Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit. Accusantium eos itaque
-                    pariatur! Amet commodi consequuntur cum ducimus expedita
-                    inventore laboriosam laborum neque nisi odio, omnis
-                    perspiciatis, quas rem totam vel. Lorem ipsum dolor sit
-                    amet, consectetur adipisicing elit. Accusantium ipsam, iure
-                    iusto obcaecati officiis optio temporibus velit? Aliquam
-                    consequuntur cum earum exercitationem illo inventore itaque
-                    magni omnis, quidem recusandae, veritatis?
+                    {{ course.course_description }}
                 </p>
             </div>
             <div class="rounded-2xl border p-5 shadow-md mb-5">
@@ -86,7 +78,7 @@ onMounted(async () => {
             </div>
             <div class="rounded-2xl border p-5 shadow-md mb-5">
                 <h3 class="text-xl font-medium mb-3">Группы</h3>
-                <ul>
+                <ul class="flex flex-col gap-3">
                     <li
                         class="flex items-center gap-3"
                         v-for="group in course.groups"
