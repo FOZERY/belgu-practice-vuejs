@@ -44,6 +44,12 @@ const routes = [
         meta: { layout: AppLayoutNames.error },
     },
     {
+        path: '/schedule',
+        name: 'schedule',
+        component: () => import('@/pages/SchedulePage.vue'),
+        meta: { auth: true },
+    },
+    {
         path: '/:pathName(.*)',
         redirect: '/',
     },

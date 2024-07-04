@@ -31,7 +31,7 @@ onMounted(async () => {
 
 <template>
     <div
-        class="flex flex-col gap-5 items-center w-full sm:w-5/6 md:w-3/4 mt-5 mx-auto"
+        class="flex flex-col gap-5 items-center w-full sm:w-5/6 md:w-3/4 mx-auto"
     >
         <div class="flex items-center justify-between w-full">
             <div class="flex-grow text-center">
